@@ -9,8 +9,8 @@
  */
 void _rotl(stack_t **doubly, unsigned int cline)
 {
-	stack_t *aux1 = NULL;
-	stack_t *aux2 = NULL;
+	stack_t *x = NULL;
+	stack_t *y = NULL;
 	(void)cline;
 
 	if (*doubly == NULL)
@@ -19,17 +19,17 @@ void _rotl(stack_t **doubly, unsigned int cline)
 	if ((*doubly)->next == NULL)
 		return;
 
-	aux1 = (*doubly)->next;
-	aux2 = *doubly;
+	x = (*doubly)->next;
+	y = *doubly;
 
-	for (; aux2->next != NULL; aux2 = aux2->next)
+	for (; y->next != NULL; y = y->next)
 		;
 
-	aux1->prev = NULL;
-	aux2->next = *doubly;
+	x->prev = NULL;
+	y->next = *doubly;
 	(*doubly)->next = NULL;
-	(*doubly)->prev = aux2;
-	*doubly = aux1;
+	(*doubly)->prev = y;
+	*doubly = x;
 }
 
 /**
@@ -41,7 +41,7 @@ void _rotl(stack_t **doubly, unsigned int cline)
  */
 void _rotr(stack_t **doubly, unsigned int cline)
 {
-	stack_t *aux = NULL;
+	stack_t *i = NULL;
 	(void)cline;
 
 	if (*doubly == NULL)
@@ -50,14 +50,14 @@ void _rotr(stack_t **doubly, unsigned int cline)
 	if ((*doubly)->next == NULL)
 		return;
 
-	aux = *doubly;
+	i = *doubly;
 
-	for (; aux->next != NULL; aux = aux->next)
+	for (; i->next != NULL; i = i->next)
 		;
 
-	aux->prev->next = NULL;
-	aux->next = *doubly;
-	aux->prev = NULL;
-	(*doubly)->prev = aux;
-	*doubly = aux;
+	i->prev->next = NULL;
+	i->next = *doubly;
+	i->prev = NULL;
+	(*doubly)->prev = i;
+	*doubly = i;
 }
