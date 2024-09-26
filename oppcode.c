@@ -7,9 +7,9 @@
  * @cline: line number
  * Return: no return
  */
-void _push(stack_t **doubly, unsigned int cline)
+void _push(stack_t **d, unsigned int cline)
 {
-	int n, j;
+	int a, x;
 
 	if (!vglo.arg)
 	{
@@ -19,9 +19,9 @@ void _push(stack_t **doubly, unsigned int cline)
 		exit(EXIT_FAILURE);
 	}
 
-	for (j = 0; vglo.arg[j] != '\0'; j++)
+	for (x = 0; vglo.arg[x] != '\0'; x++)
 	{
-		if (!isdigit(vglo.arg[j]) && vglo.arg[j] != '-')
+		if (!isdigit(vglo.arg[x]) && vglo.arg[x] != '-')
 		{
 			dprintf(2, "L%u: ", cline);
 			dprintf(2, "usage: push integer\n");
@@ -30,12 +30,12 @@ void _push(stack_t **doubly, unsigned int cline)
 		}
 	}
 
-	n = atoi(vglo.arg);
+	a = atoi(vglo.arg);
 
 	if (vglo.lifo == 1)
-		add_dnodeint(doubly, n);
+		add_dnodeint(d, a);
 	else
-		add_dnodeint_end(doubly, n);
+		add_dnodeint_end(d, a);
 }
 
 /**
@@ -45,17 +45,17 @@ void _push(stack_t **doubly, unsigned int cline)
  * @cline: line numbers
  * Return: no return
  */
-void _pall(stack_t **doubly, unsigned int cline)
+void _pall(stack_t **d, unsigned int cline)
 {
-	stack_t *aux;
+	stack_t *i;
 	(void)cline;
 
-	aux = *doubly;
+	i = *d;
 
-	while (aux)
+	while (i)
 	{
-		printf("%d\n", aux->n);
-		aux = aux->next;
+		printf("%d\n", i->n);
+		i = i->next;
 	}
 }
 
@@ -66,11 +66,11 @@ void _pall(stack_t **doubly, unsigned int cline)
  * @cline: line number
  * Return: no return
  */
-void _pint(stack_t **doubly, unsigned int cline)
+void _pint(stack_t **d, unsigned int cline)
 {
 	(void)cline;
 
-	if (*doubly == NULL)
+	if (*d == NULL)
 	{
 		dprintf(2, "L%u: ", cline);
 		dprintf(2, "can't pint, stack empty\n");
@@ -78,7 +78,7 @@ void _pint(stack_t **doubly, unsigned int cline)
 		exit(EXIT_FAILURE);
 	}
 
-	printf("%d\n", (*doubly)->n);
+	printf("%d\n", (*d)->n);
 }
 
 /**
@@ -88,19 +88,19 @@ void _pint(stack_t **doubly, unsigned int cline)
  * @cline: line number
  * Return: no return
  */
-void _pop(stack_t **doubly, unsigned int cline)
+void _pop(stack_t **d, unsigned int cline)
 {
-	stack_t *aux;
+	stack_t *a;
 
-	if (doubly == NULL || *doubly == NULL)
+	if (d == NULL || *d == NULL)
 	{
 		dprintf(2, "L%u: can't pop an empty stack\n", cline);
 		free_vglo();
 		exit(EXIT_FAILURE);
 	}
-	aux = *doubly;
-	*doubly = (*doubly)->next;
-	free(aux);
+	a = *d;
+	*d = (*d)->next;
+	free(a);
 }
 
 /**
@@ -110,27 +110,27 @@ void _pop(stack_t **doubly, unsigned int cline)
  * @cline: line number
  * Return: no return
  */
-void _swap(stack_t **doubly, unsigned int cline)
+void _swap(stack_t **d, unsigned int cline)
 {
-	int m = 0;
-	stack_t *aux = NULL;
+	int n = 0;
+	stack_t *f = NULL;
 
-	aux = *doubly;
+	f = *d;
 
-	for (; aux != NULL; aux = aux->next, m++)
+	for (; f != NULL; f = f->next, n++)
 		;
 
-	if (m < 2)
+	if (n < 2)
 	{
 		dprintf(2, "L%u: can't swap, stack too short\n", cline);
 		free_vglo();
 		exit(EXIT_FAILURE);
 	}
 
-	aux = *doubly;
-	*doubly = (*doubly)->next;
-	aux->next = (*doubly)->next;
-	aux->prev = *doubly;
-	(*doubly)->next = aux;
-	(*doubly)->prev = NULL;
+	f = *d;
+	*d = (*d)->next;
+	f->next = (*d)->next;
+	f->prev = *d;
+	(*d)->next = f;
+	(*d)->prev = NULL;
 }

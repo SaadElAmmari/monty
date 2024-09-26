@@ -7,23 +7,23 @@
  */
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	void *p = NULL;
-	unsigned int i;
+	void *x = NULL;
+	unsigned int na;
 
 	if (nmemb == 0 || size == 0)
 	{
 		return (NULL);
 	}
-	p = malloc(nmemb * size);
-	if (p == NULL)
+	x = malloc(nmemb * size);
+	if (x == NULL)
 	{
 		return (NULL);
 	}
-	for (i = 0; i < (nmemb * size); i++)
+	for (na = 0; na < (nmemb * size); na++)
 	{
-		*((char *)(p) + i) = 0;
+		*((char *)(x) + na) = 0;
 	}
-	return (p);
+	return (x);
 }
 /**
  * _realloc - change the size and copy the content
@@ -34,17 +34,17 @@ void *_calloc(unsigned int nmemb, unsigned int size)
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	char *p = NULL;
-	unsigned int i;
+	char *a = NULL;
+	unsigned int x;
 
 	if (new_size == old_size)
 		return (ptr);
 	if (ptr == NULL)
 	{
-		p = malloc(new_size);
-		if (!p)
+		a = malloc(new_size);
+		if (!a)
 			return (NULL);
-		return (p);
+		return (a);
 	}
 	if (new_size == 0 && ptr != NULL)
 	{
@@ -53,21 +53,21 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	}
 	if (new_size > old_size)
 	{
-		p = malloc(new_size);
-		if (!p)
+		a = malloc(new_size);
+		if (!a)
 			return (NULL);
-		for (i = 0; i < old_size; i++)
-			p[i] = *((char *)ptr + i);
+		for (x = 0; x < old_size; x++)
+			a[x] = *((char *)ptr + x);
 		free(ptr);
 	}
 	else
 	{
-		p = malloc(new_size);
-		if (!p)
+		a = malloc(new_size);
+		if (!a)
 			return (NULL);
-		for (i = 0; i < new_size; i++)
-			p[i] = *((char *)ptr + i);
+		for (x = 0; x < new_size; x++)
+			a[x] = *((char *)ptr + x);
 		free(ptr);
 	}
-	return (p);
+	return (a);
 }

@@ -3,13 +3,13 @@
 /**
  * _queue - sets the format of the data to a queue (FIFO)
  *
- * @doubly: head of the linked list
+ * @aa: head of the linked list
  * @cline: line number;
  * Return: no return
  */
-void _queue(stack_t **doubly, unsigned int cline)
+void _queue(stack_t **aa, unsigned int cline)
 {
-	(void)doubly;
+	(void)aa;
 	(void)cline;
 
 	vglo.lifo = 0;
@@ -18,13 +18,13 @@ void _queue(stack_t **doubly, unsigned int cline)
 /**
  * _stack - sets the format fo the data to a stack (LIFO)
  *
- * @doubly: head of the linked list
+ * @aa: head of the linked list
  * @cline: line number;
  * Return: no return
  */
-void _stack(stack_t **doubly, unsigned int cline)
+void _stack(stack_t **aa, unsigned int cline)
 {
-	(void)doubly;
+	(void)aa;
 	(void)cline;
 
 	vglo.lifo = 1;
@@ -33,70 +33,70 @@ void _stack(stack_t **doubly, unsigned int cline)
 /**
  * _add - adds the top two elements of the stack
  *
- * @doubly: head of the linked list
+ * @aa: head of the linked list
  * @cline: line number;
  * Return: no return
  */
-void _add(stack_t **doubly, unsigned int cline)
+void _add(stack_t **aa, unsigned int cline)
 {
-	int m = 0;
-	stack_t *aux = NULL;
+	int op = 0;
+	stack_t *mo = NULL;
 
-	aux = *doubly;
+	mo = *aa;
 
-	for (; aux != NULL; aux = aux->next, m++)
+	for (; mo != NULL; mo = mo->next, op++)
 		;
 
-	if (m < 2)
+	if (op < 2)
 	{
 		dprintf(2, "L%u: can't add, stack too short\n", cline);
 		free_vglo();
 		exit(EXIT_FAILURE);
 	}
 
-	aux = (*doubly)->next;
-	aux->n += (*doubly)->n;
-	_pop(doubly, cline);
+	mo = (*aa)->next;
+	mo->n += (*aa)->n;
+	_pop(aa, cline);
 }
 
 /**
- * _nop - doesn't do anythinhg
+ * _nop - doesn't do anything
  *
- * @doubly: head of the linked list
+ * @aa: head of the linked list
  * @cline: line number;
  * Return: no return
  */
-void _nop(stack_t **doubly, unsigned int cline)
+void _nop(stack_t **aa, unsigned int cline)
 {
-	(void)doubly;
+	(void)aa;
 	(void)cline;
 }
 
 /**
  * _sub - subtracts the top element to the second top element of the stack
  *
- * @doubly: head of the linked list
+ * @aa: head of the linked list
  * @cline: line number;
  * Return: no return
  */
-void _sub(stack_t **doubly, unsigned int cline)
+void _sub(stack_t **aa, unsigned int cline)
 {
-	int m = 0;
-	stack_t *aux = NULL;
+	int i = 0;
+	stack_t *xa = NULL;
 
-	aux = *doubly;
+	xa = *aa;
 
-	for (; aux != NULL; aux = aux->next, m++)
+	for (; xa != NULL; xa = xa->next, i++)
 		;
 
-	if (m < 2)
+	if (i < 2)
 	{
 		dprintf(2, "L%u: can't sub, stack too short\n", cline);
 		free_vglo();
 		exit(EXIT_FAILURE);
 	}
 
-	aux = (*doubly)->next;
-	aux->n -= (*doubly)->n;
-	_pop(doubly, cline);
+	xa = (*aa)->next;
+	xa->n -= (*aa)->n;
+	_pop(aa, cline);
 }
