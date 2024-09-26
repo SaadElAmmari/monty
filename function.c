@@ -8,33 +8,33 @@
  */
 stack_t *add_dnodeint_end(stack_t **head, const int n)
 {
-	stack_t *temp, *aux;
+	stack_t *a, *x;
 
 	if (head == NULL)
 		return (NULL);
-	temp = malloc(sizeof(stack_t));
-	if (!temp)
+	a = malloc(sizeof(stack_t));
+	if (!a)
 	{
 		dprintf(2, "Error: malloc failed\n");
 		free_vglo();
 		exit(EXIT_FAILURE);
 	}
-	temp->n = n;
+	a->n = n;
 	/*Careful with the first time*/
 	if (*head == NULL)
 	{
-		temp->next = *head;
-		temp->prev = NULL;
-		*head = temp;
+		a->next = *head;
+		a->prev = NULL;
+		*head = a;
 		return (*head);
 	}
-	aux = *head;
-	while (aux->next)
-		aux = aux->next;
-	temp->next = aux->next;
-	temp->prev = aux;
-	aux->next = temp;
-	return (aux->next);
+	x = *head;
+	while (x->next)
+		x = x->next;
+	a->next = x->next;
+	a->prev = x;
+	x->next = a;
+	return (x->next);
 }
 
 /**
@@ -45,30 +45,30 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
  */
 stack_t *add_dnodeint(stack_t **head, const int n)
 {
-	stack_t *temp;
+	stack_t *a;
 
 	if (head == NULL)
 		return (NULL);
-	temp = malloc(sizeof(stack_t));
-	if (!temp)
+	a = malloc(sizeof(stack_t));
+	if (!a)
 	{
 		dprintf(2, "Error: malloc failed\n");
 		free_vglo();
 		exit(EXIT_FAILURE);
 	}
-	temp->n = n;
+	a->n = n;
 	/*Careful with the first time*/
 	if (*head == NULL)
 	{
-		temp->next = *head;
-		temp->prev = NULL;
-		*head = temp;
+		a->next = *head;
+		a->prev = NULL;
+		*head = a;
 		return (*head);
 	}
-	(*head)->prev = temp;
-	temp->next = (*head);
-	temp->prev = NULL;
-	*head = temp;
+	(*head)->prev = a;
+	a->next = (*head);
+	a->prev = NULL;
+	*head = a;
 	return (*head);
 }
 
@@ -80,11 +80,11 @@ stack_t *add_dnodeint(stack_t **head, const int n)
  */
 void free_dlistint(stack_t *head)
 {
-	stack_t *tmp;
+	stack_t *ya;
 
-	while ((tmp = head) != NULL)
+	while ((ya = head) != NULL)
 	{
 		head = head->next;
-		free(tmp);
+		free(ya);
 	}
 }
